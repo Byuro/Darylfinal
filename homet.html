@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PC Troubleshooting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-out {
+      animation: fadeOut 0.6s forwards;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+
+    nav {
+      background-color: rgba(100, 101, 105, 0.8);
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav h1 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+    }
+
+    .logout-btn {
+      padding: 0.5rem 1rem;
+      background-color: #c6c7c7;
+      border: none;
+      border-radius: 6px;
+      color: #1a1a1a;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #636a6b;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      z-index: 100;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 2px;
+    }
+
+    /* Modified mobile menu to match the image - positioned under navbar */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 69px; /* Position right under the navbar */
+      right: 0;
+      background-color: rgba(100, 101, 105, 0.95);
+      width: 180px;
+      height: auto;
+      z-index: 99;
+      padding: 10px 0;
+      box-shadow: -2px 2px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      transform: translateX(100%);
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+      display: block;
+    }
+
+    .mobile-menu-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-menu-links li {
+      padding: 10px 20px;
+    }
+
+    .mobile-menu-links li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: block;
+    }
+
+    .mobile-menu .logout-btn {
+      margin: 10px 20px 15px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      nav .logout-btn {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .floating-cubes, .background-squares {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .cube {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      animation: floatCube 20s infinite linear;
+    }
+
+    @keyframes floatCube {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%, 90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .square {
+      position: absolute;
+      border-radius: 5px;
+      transform: rotate(45deg);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      opacity: 0.6;
+      animation: rotateSquare 10s linear infinite;
+    }
+
+    @keyframes rotateSquare {
+      0% { transform: rotate(45deg); }
+      100% { transform: rotate(405deg); }
+    }
+
+    main {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #000000;
+      text-align: center;
+    }
+
+    .intro-section {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      margin-top: 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .intro-section p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    .error-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .error-card {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .error-card a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .error-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.7);
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .home-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      margin-top: 2rem;
+      border-radius: 10px;
+    }
+
+    .button-container {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .explore-btn {
+      padding: 1rem 2rem;
+      background-color: #00bcd4;
+      border: none;
+      border-radius: 6px;
+      color: #1a1a1a;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .explore-btn:hover {
+      background-color: #00acc1;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-cubes" id="floatingCubes"></div>
+  <div class="background-squares" id="backgroundSquares"></div>
+
+  <nav>
+    <h1>PC Troubleshooting</h1>
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="homet.html">Home</a></li>
+      <li><a href="commonerror.html">Common Errors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="login.html" class="logout-btn" id="logoutBtn">Logout</a>
+  </nav>
+
+  <!-- Modified Mobile Menu to appear right under the navbar -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-links">
+      <li><a href="homet.html">Home</a></li>
+      <li><a href="commonerror.html">Common Errors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="login.html" class="logout-btn">Logout</a>
+  </div>
+
+  <main>
+    <h2 class="section-title">Welcome to PC Troubleshooting</h2>
+    <div class="intro-section">
+      <p>Having issues with your PC? We've got you covered! Find the most common PC problems and solutions right here. Whether it's a slow computer, driver issues, or a blue screen of death, we help you troubleshoot with easy-to-follow guides and tips.</p>
+    </div>
+    <img src="image1.jpeg" alt="PC Troubleshooting" class="home-image" />
+
+    <div class="button-container">
+      <a href="commonerror.html">
+        <button class="explore-btn">Explore Common Errors</button>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 John Daryl D. Panes - All Rights Reserved</p>
+  </footer>
+
+  <script>
+    const cubeContainer = document.getElementById('floatingCubes');
+    const numCubes = 60;
+    for (let i = 0; i < numCubes; i++) {
+      const cube = document.createElement('div');
+      cube.classList.add('cube');
+      const size = 10 + Math.random() * 30;
+      cube.style.width = `${size}px`;
+      cube.style.height = `${size}px`;
+      cube.style.left = `${Math.random() * 100}vw`;
+      cube.style.animationDuration = `${10 + Math.random() * 20}s`;
+      cube.style.animationDelay = `${Math.random() * 20}s`;
+      cubeContainer.appendChild(cube);
+    }
+
+    const bg = document.getElementById('backgroundSquares');
+    for (let i = 0; i < 80; i++) {
+      const square = document.createElement('div');
+      square.className = 'square';
+      const size = Math.floor(Math.random() * 60) + 20;
+      square.style.width = size + 'px';
+      square.style.height = size + 'px';
+      square.style.left = Math.random() * 100 + '%';
+      square.style.top = Math.random() * 100 + '%';
+      square.style.background = i % 2 === 0 
+        ? 'linear-gradient(145deg, #1e293b, #111827)' 
+        : 'linear-gradient(145deg, #d1d5db, #e5e7eb)';
+      bg.appendChild(square);
+    }
+
+    // Navigation animation effect
+    document.querySelectorAll("nav a, .explore-btn, .mobile-menu a").forEach(link => {
+      link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (href && !href.startsWith("#")) {
+          e.preventDefault();
+          document.body.classList.add("fade-out");
+          setTimeout(() => {
+            window.location.href = href;
+          }, 600);
+        }
+      });
+    });
+
+    // Updated Hamburger toggle for the new mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target) && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+
+    // Get navbar height and adjust mobile menu position dynamically
+    function adjustMobileMenuPosition() {
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar.offsetHeight;
+      mobileMenu.style.top = `${navbarHeight}px`;
+    }
+    
+    // Adjust on load and window resize
+    window.addEventListener('load', adjustMobileMenuPosition);
+    window.addEventListener('resize', adjustMobileMenuPosition);
+  </script>
+</body>
+</html>

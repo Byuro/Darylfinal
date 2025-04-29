@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PC Troubleshooting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('your-background-image.jpg') no-repeat center center fixed; /* Set your background image here */
+      background-size: cover; /* Cover the entire page */
+      color: #ffffff; /* Adjust text color for better contrast */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav {
+      background-color: rgba(100, 101, 105, 0.8);
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    nav h1 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+    }
+
+    .logout-btn {
+      padding: 0.5rem 1rem;
+      background-color: #c6c7c7;
+      border: none;
+      border-radius: 6px;
+      color: #1a1a1a;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #00acc1;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .burger div {
+      width: 25px;
+      height: 3px;
+      background-color: #000;
+      margin: 4px;
+      transition: 0.3s;
+    }
+
+    @media screen and (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: rgba(100, 101, 105, 0.95);
+        flex-direction: column;
+        width: 200px;
+        display: none;
+        padding: 1rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      .logout-btn {
+        margin-top: 1rem;
+      }
+    }
+
+    .floating-cubes, .background-squares {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .cube {
+      position: absolute;
+      background-color: rgba(51, 50, 50, 0.2);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+      animation: floatCube 20s infinite linear;
+    }
+
+    @keyframes floatCube {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10%, 90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .square {
+      position: absolute;
+      border-radius: 5px;
+      transform: rotate(45deg);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      opacity: 0.6;
+      animation: rotateSquare 10s linear infinite;
+    }
+
+    @keyframes rotateSquare {
+      0% { transform: rotate(45deg); }
+      100% { transform: rotate(405deg); }
+    }
+
+    main {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #050505;
+      text-align: center;
+    }
+
+    .error-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .error-card {
+      background: rgba(0, 0, 0, 0.25); /* Semi-transparent background for individual cards */
+      backdrop-filter: blur(10px); /* Apply blur effect */
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(233, 233, 233, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      color: #000000;
+    }
+
+    .error-card a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .error-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(43, 44, 44, 0.7);
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-cubes" id="floatingCubes"></div>
+  <div class="background-squares" id="backgroundSquares"></div>
+
+  <nav>
+    <h1>PC Troubleshooting</h1>
+    <div class="burger" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="homet.html">Home</a></li>
+      <li><a href="commonerror.html">Common Errors</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.html" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2 class="section-title">Common PC Errors</h2>
+    <div class="error-list">
+      <div class="error-card"><a href="error1.html">Blue Screen of Death</a></div>
+      <div class="error-card"><a href="error2.html">Slow Computer</a></div>
+      <div class="error-card"><a href="error3.html">No Internet Connection</a></div>
+      <div class="error-card"><a href="error4.html">Overheating</a></div>
+      <div class="error-card"><a href="error5.html">PC Randomly Restarts</a></div>
+      <div class="error-card"><a href="error6.html">Driver Issues</a></div>
+      <div class="error-card"><a href="error7.html">Black Screen</a></div>
+      <div class="error-card"><a href="error8.html">No Bootable Device</a></div>
+      <div class="error-card"><a href="error9.html">USB Not Recognized</a></div>
+      <div class="error-card"><a href="error10.html">Keyboard Not Working</a></div>
+      <div class="error-card"><a href="error11.html">Mouse Lag</a></div>
+      <div class="error-card"><a href="error12.html">Audio Not Working</a></div>
+      <div class="error-card"><a href="error13.html">Screen Flickering</a></div>
+      <div class="error-card"><a href="error14.html">Disk Usage 100%</a></div>
+      <div class="error-card"><a href="error15.html">App Crashing</a></div>
+      <div class="error-card"><a href="error16.html">Battery Not Charging</a></div>
+      <div class="error-card"><a href="error17.html">WiFi Keeps Disconnecting</a></div>
+      <div class="error-card"><a href="error18.html">VPN Not Connecting</a></div>
+      <div class="error-card"><a href="error19.html">System Update Fails</a></div>
+      <div class="error-card"><a href="error20.html">Corrupt System Files</a></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 John Daryl D. Panes - All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Floating elements
+    const cubeContainer = document.getElementById('floatingCubes');
+    for (let i = 0; i < 60; i++) {
+      const cube = document.createElement('div');
+      cube.classList.add('cube');
+      const size = 10 + Math.random() * 30;
+      cube.style.width = cube.style.height = `${size}px`;
+      cube.style.left = `${Math.random() * 100}vw`;
+      cube.style.animationDuration = `${10 + Math.random() * 20}s`;
+      cube.style.animationDelay = `${Math.random() * 20}s`;
+      cubeContainer.appendChild(cube);
+    }
+
+    const bg = document.getElementById('backgroundSquares');
+    for (let i = 0; i < 80; i++) {
+      const square = document.createElement('div');
+      square.className = 'square';
+      const size = Math.floor(Math.random() * 60) + 20;
+      square.style.width = size + 'px';
+      square.style.height = size + 'px';
+      square.style.left = Math.random() * 100 + '%';
+      square.style.top = Math.random() * 100 + '%';
+      square.style.background = i % 2 === 0 
+        ? 'linear-gradient(145deg, #1e293b, #111827)' 
+        : 'linear-gradient(145deg, #d1d5db, #e5e7eb)';
+      bg.appendChild(square);
+    }
+
+    // Burger menu toggle
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

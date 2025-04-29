@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login & Signup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f2;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .background-squares {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .square {
+      position: absolute;
+      border-radius: 5px;
+      transform: rotate(45deg);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      opacity: 0.6;
+      animation: rotateSquare 10s linear infinite;
+    }
+
+    @keyframes rotateSquare {
+      0% { transform: rotate(45deg); }
+      100% { transform: rotate(405deg); }
+    }
+
+    .toggle-login-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: 2px solid #2575fc;
+      color: #2575fc;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 999;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+      .toggle-login-btn:hover {
+        background: #2575fc;
+        color: white;
+      }
+
+      .intro-overlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      z-index: 100;
+      font-weight: 500;
+      font-size: 1.9rem;
+      line-height: 1.6;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: auto;
+      transition: opacity 0.6s ease-in-out;
+      opacity: 1;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+    }
+
+    .intro-overlay p {
+      max-width: 100%;
+      margin-bottom: 30px;
+      text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .main-wrapper {
+      position: relative;
+      width: 800px;
+      height: 450px;
+      display: flex;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      backdrop-filter: blur(20px) saturate(180%);
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .main-wrapper.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .left-panel, .right-panel {
+      flex: 1;
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(15px);
+      border-radius: 16px 0 0 16px;
+      position: relative;
+    }
+
+    .form-squares {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    form {
+      width: 100%;
+      z-index: 5;
+      position: relative;
+    }
+
+    form h2 {
+      margin-bottom: 40px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 16px 16px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      background: rgba(255,255,255,0.95);
+      color: #222;
+    }
+
+    .form-group input::placeholder {
+      color: transparent;
+    }
+
+    .form-group input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 8px #2575fc;
+    }
+
+    .form-group label {
+      position: absolute;
+      left: 16px;
+      top: 18px;
+      color: #666;
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s ease all;
+      background: rgba(255 255 255 / 0.9);
+      padding: 0 6px;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label {
+      top: -10px;
+      font-size: 13px;
+      color: #2575fc;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px;
+      background: #2575fc;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 8px 15px rgba(37, 117, 252, 0.4);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: #1a52c4;
+      box-shadow: 0 12px 20px rgba(26, 82, 196, 0.6);
+    }
+
+    .switch-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      color: #2575fc;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<button class="toggle-login-btn" aria-label="Toggle Login Form">Login</button>
+
+<div class="background-squares" aria-hidden="true"></div>
+
+<div class="intro-overlay" role="dialog" aria-modal="true">
+  <p>
+    Troubleshooting issues on your laptop or PC?<br />
+    Log in to access easy-to-follow guides and quick solutions to get your device running smoothly again!
+  </p>
+</div>
+
+<div class="main-wrapper" role="main" aria-label="Login form" tabindex="-1">
+  <div class="left-panel">
+    <!-- LOGIN FORM -->
+    <form id="loginForm" action="#" method="POST" novalidate>
+      <h2>Hello! Login Now!</h2>
+      <div class="form-group">
+        <input type="text" id="username" name="username" placeholder=" " required autocomplete="username" />
+        <label for="username">Username</label>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
+        <label for="password">Password</label>
+      </div>
+      <button type="submit">Login</button>
+      <div class="switch-link" id="showSignup">Don't have an account? Sign up</div>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signupForm" action="#" method="POST" novalidate style="display: none;">
+      <h2>Welcome! Create Account</h2>
+      <div class="form-group">
+        <input type="text" id="newUsername" name="newUsername" placeholder=" " required />
+        <label for="newUsername">Username</label>
+      </div>
+      <div class="form-group">
+        <input type="password" id="newPassword" name="newPassword" placeholder=" " required />
+        <label for="newPassword">Password</label>
+      </div>
+      <button type="submit">Sign Up</button>
+      <div class="switch-link" id="showLogin">Already have an account? Login</div>
+    </form>
+  </div>
+
+  <div class="right-panel" aria-hidden="true">
+    <div class="form-squares"></div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.querySelector('.intro-overlay');
+  const mainWrapper = document.querySelector('.main-wrapper');
+  const toggleBtn = document.querySelector('.toggle-login-btn');
+  const bg = document.querySelector('.background-squares');
+  const formSquares = document.querySelector('.form-squares');
+
+  let isLoginVisible = false;
+
+  toggleBtn.addEventListener('click', () => {
+    if (!isLoginVisible) {
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        mainWrapper.classList.add('visible');
+        toggleBtn.textContent = 'Close';
+        isLoginVisible = true;
+        mainWrapper.focus();
+      }, 600);
+    } else {
+      mainWrapper.classList.remove('visible');
+      overlay.style.display = 'flex';
+      void overlay.offsetWidth;
+      overlay.style.opacity = '1';
+      toggleBtn.textContent = 'Login';
+      isLoginVisible = false;
+    }
+  });
+
+  for (let i = 0; i < 50; i++) {
+    const square = document.createElement('div');
+    square.className = 'square';
+    const size = Math.floor(Math.random() * 60) + 20;
+    square.style.width = size + 'px';
+    square.style.height = size + 'px';
+    square.style.left = Math.random() * 100 + '%';
+    square.style.top = Math.random() * 100 + '%';
+    square.style.background = i % 2 === 0 
+      ? 'linear-gradient(145deg, #1e293b, #111827)' 
+      : 'linear-gradient(145deg, #d1d5db, #e5e7eb)';
+    formSquares.appendChild(square);
+  }
+
+  for (let i = 0; i < 100; i++) {
+    const square = document.createElement('div');
+    square.className = 'square';
+    const size = Math.floor(Math.random() * 60) + 20;
+    square.style.width = size + 'px';
+    square.style.height = size + 'px';
+    square.style.left = Math.random() * 100 + '%';
+    square.style.top = Math.random() * 100 + '%';
+    square.style.background = i % 2 === 0 
+      ? 'linear-gradient(145deg, #1e293b, #111827)' 
+      : 'linear-gradient(145deg, #d1d5db, #e5e7eb)';
+    bg.appendChild(square);
+  }
+
+  // Switch between login/signup forms
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  document.getElementById('showSignup').addEventListener('click', () => {
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+  });
+  document.getElementById('showLogin').addEventListener('click', () => {
+    signupForm.style.display = 'none';
+    loginForm.style.display = 'block';
+  });
+
+  // Handle login validation
+  loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+    const user = storedUsers.find(user => user.username === username && user.password === password);
+
+    if (user) {
+      alert('Login successful!');
+      window.location.href = "homet.html";  // Redirect to another page on successful login
+    } else {
+      alert('Invalid username or password.');
+    }
+  });
+
+  // Handle signup form
+  signupForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const newUsername = document.getElementById('newUsername').value;
+    const newPassword = document.getElementById('newPassword').value;
+
+    if (newUsername && newPassword) {
+      const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+      storedUsers.push({ username: newUsername, password: newPassword });
+      localStorage.setItem('users', JSON.stringify(storedUsers));
+
+      alert('Account created successfully! Please login.');
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'block';
+    } else {
+      alert('Please enter a valid username and password.');
+    }
+  });
+</script>
+
+</body>
+</html>
