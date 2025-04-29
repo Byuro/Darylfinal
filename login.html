@@ -70,27 +70,36 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #222;
+      color: #000000;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 2rem;
       text-align: center;
       z-index: 100;
       font-weight: 500;
-      font-size: 1.9rem;
-      line-height: 1.6;
-      max-width: 90%;
+      font-size: 2.2rem;
+      line-height: 1.8;
+      max-width: 800px;
       max-height: 90%;
       overflow: auto;
       transition: opacity 0.6s ease-in-out;
       opacity: 1;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      background: rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      flex: 1;
+      min-width: 320px;
+
+      /* --- Make sure long text wraps nicely --- */
+      white-space: normal;      /* Allow text to wrap naturally */
+      word-break: break-word;   /* Break long words if needed */
+      overflow-wrap: break-word; /* For better browser support */
     }
+
+
 
     .intro-overlay p {
       max-width: 100%;
@@ -222,6 +231,16 @@
       color: #2575fc;
       font-weight: bold;
     }
+    .toggle-password {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+    color: #666;
+  }
+
   </style>
 </head>
 <body>
@@ -240,35 +259,43 @@
 <div class="main-wrapper" role="main" aria-label="Login form" tabindex="-1">
   <div class="left-panel">
     <!-- LOGIN FORM -->
-    <form id="loginForm" action="#" method="POST" novalidate>
-      <h2>Hello! Login Now!</h2>
-      <div class="form-group">
-        <input type="text" id="username" name="username" placeholder=" " required autocomplete="username" />
-        <label for="username">Username</label>
-      </div>
-      <div class="form-group">
-        <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
-        <label for="password">Password</label>
-      </div>
-      <button type="submit">Login</button>
-      <div class="switch-link" id="showSignup">Don't have an account? Sign up</div>
-    </form>
-
-    <!-- SIGNUP FORM -->
-    <form id="signupForm" action="#" method="POST" novalidate style="display: none;">
-      <h2>Welcome! Create Account</h2>
-      <div class="form-group">
-        <input type="text" id="newUsername" name="newUsername" placeholder=" " required />
-        <label for="newUsername">Username</label>
-      </div>
-      <div class="form-group">
-        <input type="password" id="newPassword" name="newPassword" placeholder=" " required />
-        <label for="newPassword">Password</label>
-      </div>
-      <button type="submit">Sign Up</button>
-      <div class="switch-link" id="showLogin">Already have an account? Login</div>
-    </form>
+<form id="loginForm" action="#" method="POST" novalidate>
+  <h2>Hello! Login Now!</h2>
+  <div class="form-group">
+    <input type="text" id="username" name="username" placeholder=" " required autocomplete="username" />
+    <label for="username">Username</label>
   </div>
+  <div class="form-group">
+    <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
+    <label for="password">Password</label>
+    <span class="toggle-password" data-target="password">&#128065;</span>
+  </div>
+  <button type="submit">Login</button>
+  <div class="switch-link" id="showSignup">Don't have an account? Sign up</div>
+</form>
+<!-- SIGNUP FORM -->
+  <form id="signupForm" action="#" method="POST" novalidate style="display: none;">
+    <h2>Welcome! Create Account</h2>
+    <div class="form-group">
+      <input type="text" id="newUsername" name="newUsername" placeholder=" " required />
+      <label for="newUsername">Username</label>
+    </div>
+    <div class="form-group">
+      <input type="password" id="newPassword" name="newPassword" placeholder=" " required />
+      <label for="newPassword">Password</label>
+      <span class="toggle-password" data-target="newPassword">&#128065;</span>
+    </div>
+    <div class="form-group">
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" " required />
+      <label for="confirmPassword">Confirm Password</label>
+      <span class="toggle-password" data-target="confirmPassword">&#128065;</span>
+    </div>
+    <div style="margin-top: 20px;">
+      <button type="submit">Sign Up</button>
+    </div>
+    <div class="switch-link" id="showLogin" style="margin-top: 15px;">Already have an account? Login</div>
+  </form>
+</div>
 
   <div class="right-panel" aria-hidden="true">
     <div class="form-squares"></div>
@@ -332,54 +359,104 @@
     bg.appendChild(square);
   }
 
-  // Switch between login/signup forms
-  const loginForm = document.getElementById('loginForm');
-  const signupForm = document.getElementById('signupForm');
-  document.getElementById('showSignup').addEventListener('click', () => {
+  // Switch between login/signup forms with fade animation
+document.getElementById('showSignup').addEventListener('click', () => {
+  loginForm.style.opacity = '0';
+  setTimeout(() => {
     loginForm.style.display = 'none';
     signupForm.style.display = 'block';
-  });
-  document.getElementById('showLogin').addEventListener('click', () => {
+    signupForm.style.opacity = '0';
+    setTimeout(() => {
+      signupForm.style.opacity = '1';
+    }, 10);
+  }, 300);
+});
+
+document.getElementById('showLogin').addEventListener('click', () => {
+  signupForm.style.opacity = '0';
+  setTimeout(() => {
     signupForm.style.display = 'none';
     loginForm.style.display = 'block';
-  });
+    loginForm.style.opacity = '0';
+    setTimeout(() => {
+      loginForm.style.opacity = '1';
+    }, 10);
+  }, 300);
+});
 
-  // Handle login validation
-  loginForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-
-    const user = storedUsers.find(user => user.username === username && user.password === password);
-
-    if (user) {
-      alert('Login successful!');
-      window.location.href = "homet.html";  // Redirect to another page on successful login
+// Toggle password visibility
+const togglePasswordIcons = document.querySelectorAll('.toggle-password');
+togglePasswordIcons.forEach(icon => {
+  icon.addEventListener('click', () => {
+    const targetId = icon.getAttribute('data-target');
+    const targetInput = document.getElementById(targetId);
+    if (targetInput.type === 'password') {
+      targetInput.type = 'text';
+      icon.textContent = '🙈';
     } else {
-      alert('Invalid username or password.');
+      targetInput.type = 'password';
+      icon.textContent = '👁️';
     }
   });
+});
 
-  // Handle signup form
-  signupForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const newUsername = document.getElementById('newUsername').value;
-    const newPassword = document.getElementById('newPassword').value;
+// Handle login validation
+loginForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
 
-    if (newUsername && newPassword) {
-      const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-      storedUsers.push({ username: newUsername, password: newPassword });
-      localStorage.setItem('users', JSON.stringify(storedUsers));
+  if (!username || !password) {
+    alert('Please fill in all fields.');
+    return;
+  }
 
-      alert('Account created successfully! Please login.');
-      signupForm.style.display = 'none';
-      loginForm.style.display = 'block';
-    } else {
-      alert('Please enter a valid username and password.');
-    }
-  });
+  const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+  const user = storedUsers.find(user => user.username === username && user.password === password);
+
+  if (user) {
+    alert('Login successful!');
+    window.location.href = "homet.html"; // Redirect
+  } else {
+    alert('Invalid username or password.');
+  }
+});
+
+// Handle signup form with confirm password validation
+signupForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const newUsername = document.getElementById('newUsername').value.trim();
+  const newPassword = document.getElementById('newPassword').value.trim();
+  const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+  if (!newUsername || !newPassword || !confirmPassword) {
+    alert('Please fill in all fields.');
+    return;
+  }
+
+  if (newPassword !== confirmPassword) {
+    alert('Passwords do not match.');
+    return;
+  }
+
+  const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+  const usernameExists = storedUsers.some(user => user.username === newUsername);
+
+  if (usernameExists) {
+    alert('Username already exists. Please choose a different one.');
+    return;
+  }
+
+  storedUsers.push({ username: newUsername, password: newPassword });
+  localStorage.setItem('users', JSON.stringify(storedUsers));
+
+  alert('Account created successfully! Please login.');
+  signupForm.style.display = 'none';
+  loginForm.style.display = 'block';
+  loginForm.style.opacity = '1';
+});
+
 </script>
 
 </body>

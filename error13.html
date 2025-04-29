@@ -6,6 +6,7 @@
   <title>Blue Screen of Death</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* Global Styles */
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
@@ -21,7 +22,6 @@
       transform: translateY(20px);
       animation: fadeIn 0.6s ease-out forwards;
     }
-
     @keyframes fadeIn {
       to {
         opacity: 1;
@@ -29,6 +29,7 @@
       }
     }
 
+    /* Navbar */
     nav {
       background-color: rgba(100, 101, 105, 0.8);
       width: 100%;
@@ -42,12 +43,10 @@
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
-
     nav h1 {
       font-size: 1.8rem;
       margin: 0;
     }
-
     .nav-links {
       display: flex;
       gap: 1.5rem;
@@ -55,18 +54,15 @@
       margin: 0;
       padding: 1rem;
     }
-
     .nav-links li a {
       color: #000000;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
     }
-
     .nav-links li a:hover {
       color: #ffffff;
     }
-
     .logout-btn {
       padding: 0.5rem 1rem;
       background-color: #c6c7c7;
@@ -77,17 +73,14 @@
       text-decoration: none;
       transition: background-color 0.3s ease;
     }
-
     .logout-btn:hover {
       background-color: #636a6b;
     }
-
     .burger {
       display: none;
       flex-direction: column;
       cursor: pointer;
     }
-
     .burger div {
       width: 25px;
       height: 3px;
@@ -95,7 +88,6 @@
       margin: 4px;
       transition: 0.3s;
     }
-
     @media screen and (max-width: 768px) {
       .nav-links {
         position: absolute;
@@ -107,24 +99,18 @@
         display: none;
         padding: 1rem;
       }
-
       .nav-links.active {
         display: flex;
       }
-
       .burger {
         display: flex;
       }
-
       .logout-btn {
         margin-top: 1rem;
       }
     }
 
-    .logout-btn:hover {
-      background-color: #636a6b;
-    }
-
+    /* Background */
     .floating-cubes, .background-squares {
       position: fixed;
       inset: 0;
@@ -132,20 +118,17 @@
       pointer-events: none;
       overflow: hidden;
     }
-
     .cube {
       position: absolute;
       background-color: rgba(51, 50, 50, 0.2);
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
       animation: floatCube 20s infinite linear;
     }
-
     @keyframes floatCube {
       0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
       10%, 90% { opacity: 1; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
-
     .square {
       position: absolute;
       border-radius: 5px;
@@ -154,19 +137,18 @@
       opacity: 0.6;
       animation: rotateSquare 10s linear infinite;
     }
-
     @keyframes rotateSquare {
       0% { transform: rotate(45deg); }
       100% { transform: rotate(405deg); }
     }
 
+    /* Main Content */
     main {
       padding: 3rem 2rem;
       max-width: 1000px;
       width: 100%;
       z-index: 1;
     }
-
     .error-title {
       font-size: 2rem;
       font-weight: 700;
@@ -174,15 +156,43 @@
       color: #050505;
       text-align: center;
     }
-
-    .error-image {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 12px;
-    margin-bottom: 2rem;
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     }
-
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .carousel-image {
+      min-width: 100%;
+      object-fit: contain;
+      display: none;
+    }
+    .carousel-image.active {
+      display: block;
+    }
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #bbb;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .indicator.active {
+      background-color: #333;
+    }
 
     .error-layout {
       display: flex;
@@ -190,7 +200,6 @@
       gap: 2rem;
       margin-bottom: 2rem;
     }
-
     .error-card {
       background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(10px);
@@ -200,36 +209,42 @@
       flex: 1;
       min-width: 280px;
     }
-
     .error-card h3 {
       margin-top: 0;
     }
-
     .error-card ul {
       padding-left: 1.5rem;
     }
 
+    /* Ratings Emojis */
     .ratings {
       text-align: center;
       padding-top: 1rem;
     }
-
     .ratings h3 {
       margin-bottom: 1rem;
       color: #111;
     }
-
     .emoji {
       font-size: 2rem;
       margin: 0 0.5rem;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.3s ease-in-out, color 0.3s ease;
+      display: inline-block;
+    }
+    .emoji:hover:not(.clicked) {
+      transform: translateY(-5px);
+    }
+    .emoji.clicked {
+      animation: floatPermanent 2s ease-in-out infinite;
+    }
+    @keyframes floatPermanent {
+      0% { transform: translateY(-5px); }
+      50% { transform: translateY(5px); }
+      100% { transform: translateY(-5px); }
     }
 
-    .emoji:hover {
-      transform: scale(1.3);
-    }
-
+    /* Footer */
     footer {
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
@@ -240,6 +255,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="floating-cubes" id="floatingCubes"></div>
@@ -248,9 +264,7 @@
   <nav>
     <h1>PC Troubleshooting</h1>
     <div class="burger" id="burger">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="homet.html">Home</a></li>
@@ -262,7 +276,15 @@
 
   <main>
     <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
-    <img src="BlueScreen.png" alt="Blue Screen of Death Image" class="error-image">
+
+    <div class="carousel">
+      <div class="carousel-images">
+        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
+        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+      </div>
+      <div class="carousel-indicators" id="carouselIndicators"></div>
+    </div>
 
     <div class="error-layout">
       <div class="error-card">
@@ -304,6 +326,7 @@
   </footer>
 
   <script>
+    // Floating background
     const cubeContainer = document.getElementById('floatingCubes');
     const numCubes = 60;
     for (let i = 0; i < numCubes; i++) {
@@ -331,16 +354,45 @@
         : 'linear-gradient(145deg, #d1d5db, #e5e7eb)';
       bg.appendChild(square);
     }
+
+    // Carousel
+    const images = document.querySelectorAll('.carousel-image');
+    const indicatorsContainer = document.getElementById('carouselIndicators');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach(img => img.classList.remove('active'));
+      images[index].classList.add('active');
+      const indicators = document.querySelectorAll('.indicator');
+      indicators.forEach(indicator => indicator.classList.remove('active'));
+      indicators[index].classList.add('active');
+    }
+
+    images.forEach(() => {
+      const indicator = document.createElement('div');
+      indicator.classList.add('indicator');
+      indicator.addEventListener('click', () => {
+        currentIndex = Array.from(indicatorsContainer.children).indexOf(indicator);
+        showImage(currentIndex);
+      });
+      indicatorsContainer.appendChild(indicator);
+    });
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }, 5000);
+
+    showImage(currentIndex);
+
+    // Ratings emojis - float permanently after click
+    const emojis = document.querySelectorAll('.emoji');
+    emojis.forEach(emoji => {
+      emoji.addEventListener('click', () => {
+        emoji.classList.add('clicked');
+      });
+    });
   </script>
-
-<script>
-  const burger = document.getElementById('burger');
-  const navLinks = document.getElementById('navLinks');
-
-  burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-</script>
 
 </body>
 </html>
