@@ -84,22 +84,15 @@
       max-width: 800px;
       max-height: 90%;
       overflow: auto;
-      transition: opacity 0.6s ease-in-out;
-      opacity: 1;
       backdrop-filter: blur(10px);
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
-      flex: 1;
       min-width: 320px;
-
-      /* --- Make sure long text wraps nicely --- */
-      white-space: normal;      /* Allow text to wrap naturally */
-      word-break: break-word;   /* Break long words if needed */
-      overflow-wrap: break-word; /* For better browser support */
+      white-space: nowrap; /* Prevents text from wrapping unless it overflows */
+      overflow: hidden;    /* Ensures the text doesn't extend outside the container */
+      text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
     }
-
-
 
     .intro-overlay p {
       max-width: 100%;
@@ -107,7 +100,11 @@
       text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
       font-size: 2rem;
       text-align: center;
+      white-space: normal; /* Allows wrapping if necessary */
+      word-break: break-word; /* Breaks long words if necessary */
+      overflow-wrap: break-word; /* Ensures text wraps in most browsers */
     }
+
 
     .main-wrapper {
       position: relative;
@@ -255,6 +252,7 @@
     Log in to access easy-to-follow guides and quick solutions to get your device running smoothly again!
   </p>
 </div>
+
 
 <div class="main-wrapper" role="main" aria-label="Login form" tabindex="-1">
   <div class="left-panel">
