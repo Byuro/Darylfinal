@@ -152,11 +152,11 @@
       border-radius: 2px;
     }
 
-    /* Modified mobile menu to match the image - positioned under navbar */
+    
     .mobile-menu {
       display: none;
       position: absolute;
-      top: 69px; /* Position right under the navbar */
+      top: 69px; 
       right: 0;
       background-color: rgba(100, 101, 105, 0.95);
       width: 180px;
@@ -262,16 +262,16 @@
     }
 
     .intro-section {
-      background: rgba(255, 255, 255, 0.9); /* Brighter white background */
-      backdrop-filter: blur(10px); /* Apply blur effect */
-      padding: 1.5rem; /* Consistent padding */
-      border-radius: 12px; /* Rounded corners */
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
-      flex: 1; /* Flexible in flex layouts */
-      min-width: 280px; /* Minimum width for responsiveness */
-      margin-top: 2rem; /* Top margin for spacing */
-      text-align: center; /* Center text */
-      color: #000000; /* Text color set to black */
+      background: rgba(255, 255, 255, 0.9); 
+      backdrop-filter: blur(10px); 
+      padding: 1.5rem; 
+      border-radius: 12px; 
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+      flex: 1; 
+      min-width: 280px;
+      margin-top: 2rem; 
+      text-align: center; 
+      color: #000000; 
     }
 
     .intro-section p {
@@ -365,7 +365,7 @@
     </ul>
   </nav>
 
-  <!-- Modified Mobile Menu to appear right under the navbar -->
+ 
   <div class="mobile-menu" id="mobileMenu">
     <ul class="mobile-menu-links">
       <li><a href="homet.html">Home</a></li>
@@ -423,7 +423,7 @@
       bg.appendChild(square);
     }
 
-    // Navigation animation effect
+    
     document.querySelectorAll("nav a, .explore-btn, .mobile-menu a").forEach(link => {
       link.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
@@ -437,7 +437,7 @@
       });
     });
 
-    // Updated Hamburger toggle for the new mobile menu
+   
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -445,21 +445,21 @@
       mobileMenu.classList.toggle('active');
     });
 
-    // Close mobile menu when clicking outside
+
     document.addEventListener('click', (e) => {
       if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target) && mobileMenu.classList.contains('active')) {
         mobileMenu.classList.remove('active');
       }
     });
 
-    // Get navbar height and adjust mobile menu position dynamically
+    
     function adjustMobileMenuPosition() {
       const navbar = document.querySelector('nav');
       const navbarHeight = navbar.offsetHeight;
       mobileMenu.style.top = `${navbarHeight}px`;
     }
     
-    // Adjust on load and window resize
+    
     window.addEventListener('load', adjustMobileMenuPosition);
     window.addEventListener('resize', adjustMobileMenuPosition);
   </script>

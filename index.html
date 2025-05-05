@@ -89,9 +89,9 @@
       background: rgba(255, 255, 255, 0.9);
       border-radius: 12px;
       min-width: 320px;
-      white-space: nowrap; /* Prevents text from wrapping unless it overflows */
-      overflow: hidden;    /* Ensures the text doesn't extend outside the container */
-      text-overflow: ellipsis; /* Adds an ellipsis if the text overflows */
+      white-space: nowrap; 
+      overflow: hidden;    
+      text-overflow: ellipsis; 
     }
 
     .intro-overlay p {
@@ -100,9 +100,9 @@
       text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
       font-size: 2rem;
       text-align: center;
-      white-space: normal; /* Allows wrapping if necessary */
-      word-break: break-word; /* Breaks long words if necessary */
-      overflow-wrap: break-word; /* Ensures text wraps in most browsers */
+      white-space: normal; 
+      word-break: break-word; 
+      overflow-wrap: break-word; 
     }
 
 
@@ -256,7 +256,7 @@
 
 <div class="main-wrapper" role="main" aria-label="Login form" tabindex="-1">
   <div class="left-panel">
-    <!-- LOGIN FORM -->
+   
 <form id="loginForm" action="#" method="POST" novalidate>
   <h2>Hello! Login Now!</h2>
   <div class="form-group">
@@ -271,7 +271,7 @@
   <button type="submit">Login</button>
   <div class="switch-link" id="showSignup">Don't have an account? Sign up</div>
 </form>
-<!-- SIGNUP FORM -->
+
   <form id="signupForm" action="#" method="POST" novalidate style="display: none;">
     <h2>Welcome! Create Account</h2>
     <div class="form-group">
@@ -357,7 +357,7 @@
     bg.appendChild(square);
   }
 
-  // Switch between login/signup forms with fade animation
+  
 document.getElementById('showSignup').addEventListener('click', () => {
   loginForm.style.opacity = '0';
   setTimeout(() => {
@@ -382,7 +382,7 @@ document.getElementById('showLogin').addEventListener('click', () => {
   }, 300);
 });
 
-// Toggle password visibility
+
 const togglePasswordIcons = document.querySelectorAll('.toggle-password');
 togglePasswordIcons.forEach(icon => {
   icon.addEventListener('click', () => {
@@ -398,7 +398,7 @@ togglePasswordIcons.forEach(icon => {
   });
 });
 
-// Handle login validation
+
 loginForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -415,13 +415,13 @@ loginForm.addEventListener('submit', function(event) {
 
   if (user) {
     alert('Login successful!');
-    window.location.href = "homet.html"; // Redirect
+    window.location.href = "homet.html"; 
   } else {
     alert('Invalid username or password.');
   }
 });
 
-// Handle signup form with confirm password validation
+
 signupForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const newUsername = document.getElementById('newUsername').value.trim();
