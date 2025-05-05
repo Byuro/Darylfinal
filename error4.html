@@ -33,7 +33,7 @@
     nav {
       background-color: rgba(100, 101, 105, 0.8);
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 0.3rem 0rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -262,7 +262,7 @@
   <div class="background-squares" id="backgroundSquares"></div>
 
   <nav>
-    <h1>PC Troubleshooting</h1>
+    <h1></h1>
     <div class="burger" id="burger">
       <div></div><div></div><div></div>
     </div>
@@ -270,18 +270,18 @@
       <li><a href="homet.html">Home</a></li>
       <li><a href="commonerror.html">Common Errors</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="logout-btn">Logout</a></li>
+      <li><a href="index.html" class="logout-btn">Logout</a></li>
     </ul>
   </nav>
 
   <main>
-    <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
+    <h2 class="error-title">Overheating</h2>
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="Overheating.png" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Overheating1.png" alt="Blue Screen 2" class="carousel-image">
+        <img src="Overheating2.png" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -289,25 +289,27 @@
     <div class="error-layout">
       <div class="error-card">
         <h3>Possible Reasons</h3>
-        <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
-        </ul>
+          <ul>
+            <li>Dust buildup inside the device</li>
+            <li>Blocked air vents or poor ventilation</li>
+            <li>High-performance applications running continuously</li>
+            <li>Malfunctioning cooling fan</li>
+            <li>Dried-out or insufficient thermal paste</li>
+            <li>Old or overused hardware components</li>
+          </ul>
       </div>
 
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
-        <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
-        </ul>
+          <ul>
+            <li>Clean the internal fans and vents using compressed air</li>
+            <li>Ensure the device is on a hard, flat surface for proper airflow</li>
+            <li>Close unused applications and monitor resource usage</li>
+            <li>Use a cooling pad (for laptops)</li>
+            <li>Check if the fans are working properly in BIOS or with monitoring tools</li>
+            <li>Replace thermal paste on the CPU/GPU if overheating persists</li>
+            <li>Keep your system updated to avoid performance-related heat buildup</li>
+          </ul>
       </div>
     </div>
 

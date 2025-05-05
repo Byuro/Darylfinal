@@ -33,7 +33,7 @@
     nav {
       background-color: rgba(100, 101, 105, 0.8);
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 0.3rem 0rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -262,7 +262,7 @@
   <div class="background-squares" id="backgroundSquares"></div>
 
   <nav>
-    <h1>PC Troubleshooting</h1>
+    <h1></h1>
     <div class="burger" id="burger">
       <div></div><div></div><div></div>
     </div>
@@ -270,18 +270,18 @@
       <li><a href="homet.html">Home</a></li>
       <li><a href="commonerror.html">Common Errors</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="logout-btn">Logout</a></li>
+      <li><a href="index.html" class="logout-btn">Logout</a></li>
     </ul>
   </nav>
 
   <main>
-    <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
+    <h2 class="error-title">Black Screen</h2>
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="Blackscreen.jpg" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Blackscreen1.jpg" alt="Blue Screen 2" class="carousel-image">
+        <img src="Blackscreen2.jpg" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -289,25 +289,27 @@
     <div class="error-layout">
       <div class="error-card">
         <h3>Possible Reasons</h3>
-        <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
-        </ul>
+          <ul>
+            <li>Loose or disconnected display cables (for desktop monitors)</li>
+            <li>Faulty graphics card or display hardware</li>
+            <li>Corrupted system files or boot errors</li>
+            <li>Display brightness turned all the way down (especially on laptops)</li>
+            <li>Recent driver updates or software conflicts</li>
+            <li>System overheating or hardware failure</li>
+          </ul>
       </div>
 
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
-        <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
-        </ul>
+          <ul>
+            <li>Check power and cable connections to the monitor or screen</li>
+            <li>Try restarting the system and using an external monitor</li>
+            <li>Boot into Safe Mode to rule out driver or software issues</li>
+            <li>Press <code>Ctrl + Shift + Win + B</code> to reset the graphics driver</li>
+            <li>Perform a hard reset by holding the power button for 10 seconds</li>
+            <li>Access BIOS/UEFI to check if the system is responding</li>
+            <li>Use System Restore or recovery options if the issue started recently</li>
+          </ul>
       </div>
     </div>
 

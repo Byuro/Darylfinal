@@ -33,7 +33,7 @@
     nav {
       background-color: rgba(100, 101, 105, 0.8);
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 0.3rem 0rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -262,7 +262,7 @@
   <div class="background-squares" id="backgroundSquares"></div>
 
   <nav>
-    <h1>PC Troubleshooting</h1>
+    <h1></h1>
     <div class="burger" id="burger">
       <div></div><div></div><div></div>
     </div>
@@ -270,18 +270,18 @@
       <li><a href="homet.html">Home</a></li>
       <li><a href="commonerror.html">Common Errors</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="logout-btn">Logout</a></li>
+      <li><a href="index.html" class="logout-btn">Logout</a></li>
     </ul>
   </nav>
 
   <main>
-    <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
+    <h2 class="error-title">Driver Issues</h2>
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="DriverIssue.jpg" alt="Blue Screen 1" class="carousel-image active">
+        <img src="DriverIssue1.jpg" alt="Blue Screen 2" class="carousel-image">
+        <img src="DriverIssue2.jpg" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -289,25 +289,27 @@
     <div class="error-layout">
       <div class="error-card">
         <h3>Possible Reasons</h3>
-        <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
-        </ul>
+          <ul>
+            <li>Outdated or missing drivers</li>
+            <li>Incorrect driver installed for hardware</li>
+            <li>Driver conflicts between devices</li>
+            <li>Corrupt driver files</li>
+            <li>Incomplete Windows or system updates</li>
+            <li>Hardware not supported by current OS version</li>
+          </ul>
       </div>
 
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
-        <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
-        </ul>
+          <ul>
+            <li>Open Device Manager to check for errors or warnings</li>
+            <li>Right-click and update or reinstall the problematic driver</li>
+            <li>Download the latest drivers from the manufacturer’s website</li>
+            <li>Roll back to a previous working driver if issues started recently</li>
+            <li>Run Windows Update to ensure compatibility</li>
+            <li>Use tools like Driver Booster or Snappy Driver Installer (with caution)</li>
+            <li>Uninstall conflicting drivers and restart the system</li>
+          </ul>
       </div>
     </div>
 

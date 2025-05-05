@@ -33,7 +33,7 @@
     nav {
       background-color: rgba(100, 101, 105, 0.8);
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 0.3rem 0rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -262,7 +262,7 @@
   <div class="background-squares" id="backgroundSquares"></div>
 
   <nav>
-    <h1>PC Troubleshooting</h1>
+    <h1></h1>
     <div class="burger" id="burger">
       <div></div><div></div><div></div>
     </div>
@@ -270,18 +270,18 @@
       <li><a href="homet.html">Home</a></li>
       <li><a href="commonerror.html">Common Errors</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html" class="logout-btn">Logout</a></li>
+      <li><a href="index.html" class="logout-btn">Logout</a></li>
     </ul>
   </nav>
 
   <main>
-    <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
+    <h2 class="error-title">No Bootable Device</h2>
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="Nobootable.png" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Nobootable1.png" alt="Blue Screen 2" class="carousel-image">
+        <img src="Nobootable2.png" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -289,25 +289,26 @@
     <div class="error-layout">
       <div class="error-card">
         <h3>Possible Reasons</h3>
-        <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
-        </ul>
+          <ul>
+            <li>Incorrect boot order in BIOS/UEFI</li>
+            <li>Disconnected or failed hard drive/SSD</li>
+            <li>Corrupted or missing boot files</li>
+            <li>Damaged Master Boot Record (MBR)</li>
+            <li>Operating system not installed or improperly installed</li>
+            <li>Loose internal cables or hardware failure</li>
+          </ul>
       </div>
 
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
-        <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
-        </ul>
+          <ul>
+            <li>Enter BIOS/UEFI and ensure the correct drive is set as the first boot device</li>
+            <li>Check if the drive is detected in BIOS; reconnect or reseat the drive if needed</li>
+            <li>Use a Windows installation USB/DVD to access recovery tools</li>
+            <li>Run <code>bootrec /fixmbr</code>, <code>bootrec /fixboot</code>, and <code>bootrec /rebuildbcd</code> in Command Prompt</li>
+            <li>Try automatic startup repair from the recovery environment</li>
+            <li>If the drive is physically damaged, consider data recovery options or replacement</li>
+          </ul>
       </div>
     </div>
 
