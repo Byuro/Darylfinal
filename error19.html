@@ -279,9 +279,9 @@
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="Updatefail.png" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Updatefail1.png" alt="Blue Screen 2" class="carousel-image">
+        <img src="Updatefail2.png" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -290,23 +290,25 @@
       <div class="error-card">
         <h3>Possible Reasons</h3>
         <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
+          <li>Corrupted or incomplete update files</li>
+          <li>Insufficient disk space or system resources</li>
+          <li>Internet connection interruptions during download</li>
+          <li>Conflicting third-party software or antivirus</li>
+          <li>Damaged Windows Update components or services</li>
+          <li>Incompatible hardware or drivers</li>
         </ul>
       </div>
 
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
         <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
+          <li>Ensure a stable internet connection and sufficient storage space</li>
+          <li>Run the Windows Update Troubleshooter</li>
+          <li>Temporarily disable antivirus or firewall software</li>
+          <li>Clear the Windows Update cache using Command Prompt</li>
+          <li>Run <code>sfc /scannow</code> and <code>DISM /Online /Cleanup-Image /RestoreHealth</code></li>
+          <li>Try updating via Windows Update Assistant or Media Creation Tool</li>
+          <li>Check for driver or BIOS updates from your PC manufacturer</li>
         </ul>
       </div>
     </div>

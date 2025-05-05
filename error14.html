@@ -275,13 +275,13 @@
   </nav>
 
   <main>
-    <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
+    <h2 class="error-title">Disk Usage 100%</h2>
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="Disk.jpg" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Disk1.jpg" alt="Blue Screen 2" class="carousel-image">
+        <img src="Disk2.jpg" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -289,25 +289,26 @@
     <div class="error-layout">
       <div class="error-card">
         <h3>Possible Reasons</h3>
-        <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
-        </ul>
+          <ul>
+            <li>Too many background applications or startup programs</li>
+            <li>Windows services like Superfetch (SysMain), Search, or Windows Update</li>
+            <li>Outdated storage drivers or firmware</li>
+            <li>Corrupted system files or virtual memory settings</li>
+            <li>Running heavy antivirus scans or malware infections</li>
+            <li>Faulty hard drive or SSD nearing failure</li>
+          </ul>
       </div>
-
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
-        <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
-        </ul>
+          <ul>
+            <li>Open Task Manager to identify resource-heavy processes</li>
+            <li>Disable or limit Windows Search and SysMain (Superfetch)</li>
+            <li>Update storage controller drivers via Device Manager</li>
+            <li>Run <code>chkdsk /f /r</code> and <code>sfc /scannow</code> in Command Prompt</li>
+            <li>Temporarily disable antivirus to check for interference</li>
+            <li>Adjust virtual memory settings manually</li>
+            <li>Replace or upgrade the hard drive if hardware issues persist</li>
+          </ul>
       </div>
     </div>
 

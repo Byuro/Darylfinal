@@ -275,13 +275,13 @@
   </nav>
 
   <main>
-    <h2 class="error-title">Blue Screen of Death (BSOD)</h2>
+    <h2 class="error-title">Corrupt System Files</h2>
 
     <div class="carousel">
       <div class="carousel-images">
-        <img src="BlueScreen.png" alt="Blue Screen 1" class="carousel-image active">
-        <img src="Bluescreen1.jpg" alt="Blue Screen 2" class="carousel-image">
-        <img src="BlueScreen.png" alt="Blue Screen 3" class="carousel-image">
+        <img src="Corrup.jpg" alt="Blue Screen 1" class="carousel-image active">
+        <img src="Corrup1.jpg" alt="Blue Screen 2" class="carousel-image">
+        <img src="Corrup2.jpg" alt="Blue Screen 3" class="carousel-image">
       </div>
       <div class="carousel-indicators" id="carouselIndicators"></div>
     </div>
@@ -290,23 +290,25 @@
       <div class="error-card">
         <h3>Possible Reasons</h3>
         <ul>
-          <li>Corrupted or outdated drivers</li>
-          <li>Overheating or hardware failure</li>
-          <li>Corrupt system files</li>
-          <li>Incompatible updates or malware</li>
-          <li>Faulty RAM or hard drive</li>
+          <li>Sudden power loss or forced shutdowns</li>
+          <li>Failed Windows updates or installations</li>
+          <li>Malware or virus infections altering system files</li>
+          <li>Bad sectors on the hard drive or SSD</li>
+          <li>Conflicts with third-party software or drivers</li>
+          <li>Improper system configuration changes</li>
         </ul>
       </div>
 
       <div class="error-card">
         <h3>Troubleshooting Guide</h3>
         <ul>
-          <li>Boot into Safe Mode</li>
-          <li>Uninstall recent drivers or updates</li>
-          <li>Run <code>sfc /scannow</code> in Command Prompt</li>
-          <li>Check for overheating and dust</li>
-          <li>Run memory and disk diagnostics</li>
-          <li>Perform System Restore if needed</li>
+          <li>Run <code>sfc /scannow</code> in Command Prompt as Administrator</li>
+          <li>Use <code>DISM /Online /Cleanup-Image /RestoreHealth</code> for deeper repair</li>
+          <li>Perform a full malware scan using trusted antivirus software</li>
+          <li>Check the disk for errors using <code>chkdsk /f /r</code></li>
+          <li>Uninstall recently installed apps or drivers that may have caused issues</li>
+          <li>Perform a System Restore to revert to a stable point</li>
+          <li>As a last resort, back up your data and reset or reinstall Windows</li>
         </ul>
       </div>
     </div>
